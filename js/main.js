@@ -26,7 +26,7 @@ function setupEventListeners() {
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
-            openTech(e, this.textContent.toLowerCase());
+            openTech(e, this.textContent.toLowerCase().replace('-', ''));
         });
     });
     
@@ -135,7 +135,11 @@ function openTech(evt, techName) {
         evt.currentTarget.classList.add('active');
     } else {
         // Find the button by tech name and mark it active
-        document.querySelector(`.tab-btn[onclick*="${techName}"]`).classList.add('active');
+        const selector = `.tab-btn[onclick*="${techName}"]`;
+        const button = document.querySelector(selector);
+        if (button) {
+            button.classList.add('active');
+        }
     }
     
     // Load content if not already loaded
@@ -169,7 +173,7 @@ function loadCommunicationContent(techName) {
     const grid = document.getElementById(`${techName}-grid`);
     
     // Check if content is already loaded
-    if (grid.children.length > 0) {
+    if (grid && grid.children.length > 0) {
         return;
     }
     
@@ -205,8 +209,11 @@ function loadCommunicationContent(techName) {
             const analysisItem = document.createElement('div');
             analysisItem.className = 'analysis-item';
             
+            // Handle spaces in file names for URL encoding
+            const fileName = encodeURIComponent(item.name) + '.png';
+            
             analysisItem.innerHTML = `
-                <img src="images/communication/${techName}/${item.name}.png" alt="${item.name}" class="analysis-image">
+                <img src="images/communication/${techName}/${fileName}" alt="${item.name}" class="analysis-image">
                 <div class="analysis-info">
                     <h4>${formatName(item.name)}</h4>
                     <p>${item.description}</p>
@@ -250,14 +257,34 @@ function loadSpatiotemporalContent(metricName) {
     loader.className = 'loader';
     grid.appendChild(loader);
     
-    // Define analysis items for spatiotemporal metrics
-    const analysisItems = [
-        { name: 'Overall', description: `Overall ${formatMetricName(metricName)} analysis across all units` },
-        { name: 'By_Command', description: `${formatMetricName(metricName)} analysis at the Command level` },
-        { name: 'By_Company', description: `${formatMetricName(metricName)} analysis at the Company level` },
-        { name: 'By_Platoon', description: `${formatMetricName(metricName)} analysis at the Platoon level` },
-        { name: 'By_Vehicle_Type', description: `${formatMetricName(metricName)} analysis by Vehicle Type` }
-    ];
+    // Define analysis items for spatiotemporal metrics based on actual file naming conventions
+    let analysisItems = [];
+    
+    // Special case for spatiotemporal-coverage which has a different file structure
+    if (metricName === 'spatiotemporal-coverage') {
+        analysisItems.push({ name: 'anglova', description: `${formatMetricName(metricName)} analysis` });
+    }
+    // Special case for spatial-projection which has a different file structure
+    else if (metricName === 'spatial-projection') {
+        analysisItems = [
+            { name: 'Command_Unknown', description: `${formatMetricName(metricName)} analysis for Command` },
+            { name: 'Company_Unknown', description: `${formatMetricName(metricName)} analysis for Company` },
+            { name: 'Platoon_Unknown', description: `${formatMetricName(metricName)} analysis for Platoon` },
+            { name: 'Vehicle Type_Unknown', description: `${formatMetricName(metricName)} analysis by Vehicle Type` }
+        ];
+    }
+    // Standard pattern for most metrics
+    else {
+        analysisItems = [
+            { name: `Command_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` }
+        ];
+    }
     
     // Remove loader after a short delay to simulate loading
     setTimeout(() => {
@@ -268,10 +295,13 @@ function loadSpatiotemporalContent(metricName) {
             const analysisItem = document.createElement('div');
             analysisItem.className = 'analysis-item';
             
+            // Handle spaces in file names for URL encoding
+            const fileName = encodeURIComponent(item.name) + '.png';
+            
             analysisItem.innerHTML = `
-                <img src="images/spatiotemporal/${metricName}/${item.name}.png" alt="${item.name}" class="analysis-image">
+                <img src="images/spatiotemporal/${metricName}/${fileName}" alt="${item.name}" class="analysis-image">
                 <div class="analysis-info">
-                    <h4>${item.name.replace(/_/g, ' ')}</h4>
+                    <h4>${formatSpatiotemporalName(item.name, metricName)}</h4>
                     <p>${item.description}</p>
                 </div>
             `;
@@ -308,6 +338,27 @@ function formatName(name) {
     }
     
     return formattedName;
+}
+
+// Format spatiotemporal name for display
+function formatSpatiotemporalName(name, metricType) {
+    // Special case for spatiotemporal-coverage
+    if (metricType === 'spatiotemporal-coverage' && name === 'anglova') {
+        return 'Spatiotemporal Coverage';
+    }
+    
+    // Special case for spatial-projection
+    if (metricType === 'spatial-projection' && name.includes('_Unknown')) {
+        return name.replace('_Unknown', '');
+    }
+    
+    // For metrics with _metric_name_ecdf pattern
+    const metricNameUnderscored = metricType.replace(/-/g, '_');
+    if (name.includes('_' + metricNameUnderscored + '_ecdf')) {
+        return name.replace('_' + metricNameUnderscored + '_ecdf', '');
+    }
+    
+    return name;
 }
 
 // Helper function to convert kebab-case to Title Case
