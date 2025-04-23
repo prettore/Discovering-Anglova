@@ -1,0 +1,34 @@
+# Discovering Anglova - GitHub Page Creation
+
+## Tasks
+- [x] Explore Anglova Scenario website to understand context
+- [x] Access Google Drive folder with analyses
+- [x] Analyze folder structure and content
+- [ ] Create GitHub page structure
+  - [x] Set up basic directory structure
+  - [ ] Create HTML templates
+  - [ ] Create CSS files
+  - [ ] Create JavaScript files
+- [ ] Develop dynamic website with analyses
+  - [ ] Create main index page
+  - [ ] Create Communication section
+    - [ ] Bluetooth analyses
+    - [ ] UHF analyses
+    - [ ] VHF analyses
+    - [ ] Wi-Fi analyses
+  - [ ] Create Spatiotemporal section
+    - [ ] Acceleration analyses
+    - [ ] Delta Time analyses
+    - [ ] Destine Arrive Time analyses
+    - [ ] Distance analyses
+    - [ ] Path Tortuosity analyses
+    - [ ] Radius Gyration analyses
+    - [ ] Spatial Projection analyses
+    - [ ] Spatiotemporal Coverage analyses
+    - [ ] Speed analyses
+    - [ ] Straight Line Distance analyses
+    - [ ] Time Stopped analyses
+    - [ ] Total Distance analyses
+- [ ] Deploy GitHub page
+- [ ] Verify and test website
+- [ ] Report completion to user

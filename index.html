@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovering Anglova - Vignette 2 Analysis</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Discovering Anglova</h1>
+            <p>Data Analysis of Anglova Scenario Vignette 2: Troop Deployment</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#communication">Communication</a></li>
+                <li><a href="#spatiotemporal">Spatiotemporal</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="overview" class="section">
+        <div class="container">
+            <h2>Overview</h2>
+            <p>This website showcases the data analyses conducted to explore the characteristics of the Anglova Scenario Vignette 2. The analyses focus on spatiotemporal mobility metrics and communication patterns within the scenario.</p>
+            
+            <div class="info-box">
+                <h3>About Anglova Scenario</h3>
+                <p>The Anglova Scenario was developed as part of the NATO IST-124 Research Task Group on Heterogeneous Networks: Improving Connectivity and Network Efficiency. It is an emulation scenario specifically developed for experimentation over emulated tactical networking environments.</p>
+                <p>Vignette 2 focuses on Troop Deployment and consists of detailed movement and pathloss parameters for a battalion-sized deployment.</p>
+                <a href="https://anglova.net/" target="_blank" class="btn">Visit Anglova Website</a>
+            </div>
+            
+            <div class="analysis-categories">
+                <div class="category-card">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <h3>Communication</h3>
+                    <p>Analyses of communication patterns across different technologies: Bluetooth, UHF, VHF, and Wi-Fi.</p>
+                    <a href="#communication" class="btn">View Analyses</a>
+                </div>
+                <div class="category-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Spatiotemporal</h3>
+                    <p>Analyses of mobility metrics including speed, distance, acceleration, and path characteristics.</p>
+                    <a href="#spatiotemporal" class="btn">View Analyses</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="communication" class="section">
+        <div class="container">
+            <h2>Communication Analyses</h2>
+            <p>These analyses explore the communication patterns across different technologies in the Anglova Scenario Vignette 2.</p>
+            
+            <div class="tech-tabs">
+                <button class="tab-btn active" onclick="openTech(event, 'bluetooth')">Bluetooth</button>
+                <button class="tab-btn" onclick="openTech(event, 'uhf')">UHF</button>
+                <button class="tab-btn" onclick="openTech(event, 'vhf')">VHF</button>
+                <button class="tab-btn" onclick="openTech(event, 'wifi')">Wi-Fi</button>
+            </div>
+            
+            <div id="bluetooth" class="tech-content active">
+                <h3>Bluetooth Analysis</h3>
+                <p>Analysis of Bluetooth communication patterns across different unit types and equipment categories.</p>
+                <div class="analysis-grid" id="bluetooth-grid">
+                    <!-- Content will be loaded dynamically via JavaScript -->
+                </div>
+            </div>
+            
+            <div id="uhf" class="tech-content">
+                <h3>UHF Analysis</h3>
+                <p>Analysis of Ultra High Frequency communication patterns across different unit types and equipment categories.</p>
+                <div class="analysis-grid" id="uhf-grid">
+                    <!-- Content will be loaded dynamically via JavaScript -->
+                </div>
+            </div>
+            
+            <div id="vhf" class="tech-content">
+                <h3>VHF Analysis</h3>
+                <p>Analysis of Very High Frequency communication patterns across different unit types and equipment categories.</p>
+                <div class="analysis-grid" id="vhf-grid">
+                    <!-- Content will be loaded dynamically via JavaScript -->
+                </div>
+            </div>
+            
+            <div id="wifi" class="tech-content">
+                <h3>Wi-Fi Analysis</h3>
+                <p>Analysis of Wi-Fi communication patterns across different unit types and equipment categories.</p>
+                <div class="analysis-grid" id="wifi-grid">
+                    <!-- Content will be loaded dynamically via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="spatiotemporal" class="section">
+        <div class="container">
+            <h2>Spatiotemporal Analyses</h2>
+            <p>These analyses explore the spatiotemporal mobility metrics in the Anglova Scenario Vignette 2.</p>
+            
+            <div class="metrics-container">
+                <div class="metrics-sidebar">
+                    <ul id="metrics-list">
+                        <li class="metric-item active" data-metric="acceleration">Acceleration</li>
+                        <li class="metric-item" data-metric="delta-time">Delta Time</li>
+                        <li class="metric-item" data-metric="destine-arrive-time">Destine Arrive Time</li>
+                        <li class="metric-item" data-metric="distance">Distance</li>
+                        <li class="metric-item" data-metric="path-tortuosity">Path Tortuosity</li>
+                        <li class="metric-item" data-metric="radius-gyration">Radius Gyration</li>
+                        <li class="metric-item" data-metric="spatial-projection">Spatial Projection</li>
+                        <li class="metric-item" data-metric="spatiotemporal-coverage">Spatiotemporal Coverage</li>
+                        <li class="metric-item" data-metric="speed">Speed</li>
+                        <li class="metric-item" data-metric="straight-line-distance">Straight Line Distance</li>
+                        <li class="metric-item" data-metric="time-stopped">Time Stopped</li>
+                        <li class="metric-item" data-metric="total-distance">Total Distance</li>
+                    </ul>
+                </div>
+                
+                <div class="metrics-content">
+                    <div id="acceleration" class="metric-content active">
+                        <h3>Acceleration</h3>
+                        <p>Analysis of acceleration patterns across different units in the scenario.</p>
+                        <div class="analysis-grid" id="acceleration-grid">
+                            <!-- Content will be loaded dynamically via JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Other metric content divs will be created dynamically via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About This Project</h2>
+            <p>This website was created to showcase the data analyses conducted on the Anglova Scenario Vignette 2, focusing on spatiotemporal mobility metrics and communication patterns.</p>
+            
+            <div class="about-content">
+                <div class="about-item">
+                    <h3>Data Source</h3>
+                    <p>The analyses presented on this website are based on the Anglova Scenario Vignette 2, which was developed as part of the NATO IST-124 Research Task Group.</p>
+                    <p>The original data can be accessed from the <a href="https://anglova.net/" target="_blank">Anglova website</a>.</p>
+                </div>
+                
+                <div class="about-item">
+                    <h3>Analysis Methodology</h3>
+                    <p>The trace file was characterized by exploring the spatiotemporal mobility metrics, including speed, distance, acceleration, and path characteristics.</p>
+                    <p>Communication patterns were analyzed across different technologies: Bluetooth, UHF, VHF, and Wi-Fi.</p>
+                </div>
+                
+                <div class="about-item">
+                    <h3>GitHub Repository</h3>
+                    <p>This website is hosted on GitHub Pages. You can access the repository at:</p>
+                    <a href="https://github.com/prettore/Discovering-Anglova" target="_blank" class="btn">GitHub Repository</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Discovering Anglova. All rights reserved.</p>
+            <p>Based on the <a href="https://anglova.net/" target="_blank">Anglova Scenario</a> developed by NATO IST-124 Research Task Group.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
