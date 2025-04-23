@@ -1,1 +1,1 @@
-# prettore.github.io-Discovering-Anglova
+# Discovering Anglova Scenario - Vignette 2: Troop Deployment
