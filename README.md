@@ -60,4 +60,4 @@ This project is licensed under the [GPL-3.0 License](LICENSE).
 
 ## Acknowledgments
 
-- The authors would like to thank The National Council for Scientific and Technological Development – CNPq and Bundeswehr (BAAINBw and WTD 81).
+- The authors would like to thank the National Council for Scientific and Technological Development â€“ CNPq and Bundeswehr (BAAINBw and WTD 81) for supporting this research.
