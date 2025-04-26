@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovering Anglova - ER Diagram</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .er-diagram-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+        }
+        
+        .er-diagram-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .er-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .er-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .er-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Discovering Anglova</h1>
+            <p>Data Analysis of Anglova Scenario Vignette 2: Troop Deployment</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../index.html#overview">Overview</a></li>
+                <li><a href="../index.html#communication">Communication</a></li>
+                <li><a href="../index.html#spatiotemporal">Spatiotemporal</a></li>
+                <li><a href="index.html">ER Diagram</a></li>
+                <li><a href="../index.html#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="er-diagram" class="section">
+        <div class="container">
+            <h2>Entity-Relation Diagram</h2>
+            <p>This section presents the Entity-Relation diagram for Anglova Scenario Vignette 2, showing the relationships between different entities in the battalion deployment.</p>
+            
+            <div class="er-tabs">
+                <button class="tab-btn active" onclick="openERTab(event, 'battalion')">Battalion Structure</button>
+                <button class="tab-btn" onclick="openERTab(event, 'company')">Company Relationships</button>
+            </div>
+            
+            <div id="battalion" class="er-content active">
+                <h3>Battalion Structure</h3>
+                <p>This diagram shows the hierarchical structure of the mechanized battalion in Anglova Vignette 2.</p>
+                <div class="er-diagram-container" id="battalion-diagram">
+                    <iframe src="Anglova-Vignette2-ER.html"></iframe>
+                </div>
+            </div>
+            
+            <div id="company" class="er-content active">
+                <h3>Company and Platoon Relationships</h3>
+                <p>This diagram shows the relationships between companies and platoons in the Anglova Vignette 2 scenario.</p>
+                <div class="er-diagram-container" id="company-diagram">
+                    <iframe src="Anglova-Vignette2-ER2.html"></iframe>
+                </div>
+            </div>     
+            
+            <div class="info-box">
+                <h3>About the ER Diagram</h3>
+                <p>The Entity-Relation diagram provides a visual representation of the relationships between different entities in the Anglova Scenario Vignette 2. It helps in understanding the structure of the battalion.</p>
+                <p>The diagram was created using diagrams.net (formerly draw.io) and is interactive. You can zoom in/out and pan around to explore different parts of the diagram.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Discovering Anglova. All rights reserved.</p>
+            <p>Based on the <a href="https://anglova.net/" target="_blank">Anglova Scenario</a> developed by NATO IST-124 Research Task Group.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to open ER diagram tabs
+        function openERTab(evt, tabName) {
+            // Hide all er content
+            const erContents = document.querySelectorAll('.er-content');
+            erContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            const tabBtns = document.querySelectorAll('.er-tabs .tab-btn');
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show the selected er content and mark the button as active
+            document.getElementById(tabName).classList.add('active');
+            
+            // If event is from a button click, mark that button as active
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
+            }
+        }
+
+        // Animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation class to elements when they come into view
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.er-diagram-container, .info-box');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.animation = 'fadeIn 1s ease-in-out';
+                        element.style.opacity = '1';
+                    }
+                });
+            };
+            
+            // Set initial opacity to 0 for animation elements
+            const elements = document.querySelectorAll('.er-diagram-container, .info-box');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+            });
+            
+            // Run animation check on load and scroll
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on page load
+        });
+    </script>
+</body>
+</html>
