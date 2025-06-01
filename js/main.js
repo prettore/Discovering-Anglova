@@ -288,18 +288,18 @@ function loadSpatiotemporalContent(metricName) {
     }
     else if (metricName === 'speed') {
         analysisItems = [
-            { name: 'Command_speed_ECDF', description: `${formatMetricName(metricName)} analysis at the Command level` },
-            { name: 'Company_speed_ECDF', description: `${formatMetricName(metricName)} analysis at the Company level` },
-            { name: 'Company Type_speed_ECDF', description: `${formatMetricName(metricName)} analysis by Company Type` },
-            { name: 'Platoon_speed_ECDF', description: `${formatMetricName(metricName)} analysis at the Platoon level` },
-            { name: 'Platoon Type_speed_ECDF', description: `${formatMetricName(metricName)} analysis by Platoon Type` },
-            { name: 'Vehicle Function_speed_ECDF', description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
-            { name: 'Vehicle Type_speed_ECDF', description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
-            { name: 'Company_Boxplot', description: `${formatMetricName(metricName)} analysis by Company` },
-            { name: 'Company_Type_Boxplot', description: `${formatMetricName(metricName)} analysis by Company Type` },
-            { name: 'Platoon_Type_Boxplot', description: `${formatMetricName(metricName)} analysis by Platoon Type` },
-            { name: 'Company_Violinplot', description: `${formatMetricName(metricName)} analysis by Company` },
-            { name: 'Command_Violinplot', description: `${formatMetricName(metricName)} analysis by Command` },
+            { name: 'Command_speed_ecdf', description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: 'Company_speed_ecdf', description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: 'Company Type_speed_ecdf', description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: 'Platoon_speed_ecdf', description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: 'Platoon Type_speed_ecdf', description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: 'Vehicle Function_speed_ecdf', description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: 'Vehicle Type_speed_ecdf', description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
+            { name: 'Company_boxplot', description: `${formatMetricName(metricName)} analysis by Company` },
+            { name: 'Company_Type_boxplot', description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: 'Platoon_Type_boxplot', description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: 'Company_violinplot', description: `${formatMetricName(metricName)} analysis by Company` },
+            { name: 'Command_violinplot', description: `${formatMetricName(metricName)} analysis by Command` },
             { name: 'Anglova_Mean_Over_Time', description: `Full scenario mean speed analysis over time` },
             { name: 'Company_Mean_Over_Time', description: `Companies mean speed analysis over time` },
             { name: 'Platoon_Mean_Over_Time', description: `Platoons mean speed analysis over time` },
@@ -307,18 +307,18 @@ function loadSpatiotemporalContent(metricName) {
     }
     else if (metricName === 'straight-line-distance') {
         analysisItems = [
-            { name: `Command_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Command level` },
-            { name: `Company_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Company level` },
-            { name: `Company Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Company Type` },
-            { name: `Platoon_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
-            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
-            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
-            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
-            { name: `Anglova_KDE`, description: `${formatMetricName(metricName)} analysis full scenario density probability` },
-            { name: `Company_vs_Platoon_KDE`, description: `${formatMetricName(metricName)} density probability by Company vs Platoon` },
-            { name: `Company_Facetgrid`, description: `${formatMetricName(metricName)} density facedgrid by Company` },
-            { name: `Command_Facetgrid`, description: `${formatMetricName(metricName)} density facedgrid by Command` },
-            { name: `Company_Boxplot`, description: `${formatMetricName(metricName)} analysis by Company` },
+            { name: `Command_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
+            { name: `Anglova_kde`, description: `${formatMetricName(metricName)} analysis full scenario density probability` },
+            { name: `Company_vs_Platoon_kde`, description: `${formatMetricName(metricName)} density probability by Company vs Platoon` },
+            { name: `Company_facetgrid`, description: `${formatMetricName(metricName)} density facedgrid by Company` },
+            { name: `Command_facetgrid`, description: `${formatMetricName(metricName)} density facedgrid by Command` },
+            { name: `Company_boxplot`, description: `${formatMetricName(metricName)} analysis by Company` },
         ];
     }
     else if (metricName === 'connectivity') {
@@ -357,13 +357,13 @@ function loadSpatiotemporalContent(metricName) {
     }
     else if (metricName === 'path-tortuosity') {
         analysisItems = [
-            { name: `Command_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Command level` },
-            { name: `Company_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Company level` },
-            { name: `Company Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Company Type` },
-            { name: `Platoon_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
-            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
-            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
-            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
+            { name: `Command_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
             { name: `Anglova_KDE`, description: `${formatMetricName(metricName)} analysis full scenario density probability` },
             { name: `Company_KDE`, description: `${formatMetricName(metricName)} analysis density probability by Command` },
             { name: `Company_vs_Platoon_KDE`, description: `${formatMetricName(metricName)} density probability by Company vs Platoon` },
@@ -371,16 +371,16 @@ function loadSpatiotemporalContent(metricName) {
     }
     else if (metricName === 'total-distance') {
         analysisItems = [
-            { name: `Command_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Command level` },
-            { name: `Company_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Company level` },
-            { name: `Company Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Company Type` },
-            { name: `Platoon_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
-            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
-            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
-            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
-            { name: `Anglova_KDE`, description: `${formatMetricName(metricName)} analysis full scenario density probability` },
-            { name: `Company_KDE`, description: `${formatMetricName(metricName)} analysis density probability by Command` },
-            { name: `Company_vs_Platoon_KDE`, description: `${formatMetricName(metricName)} density probability by Company vs Platoon` },
+            { name: `Command_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
+            { name: `Anglova_kde`, description: `${formatMetricName(metricName)} analysis full scenario density probability` },
+            { name: `Company_kde`, description: `${formatMetricName(metricName)} analysis density probability by Command` },
+            { name: `Company_vs_Platoon_kde`, description: `${formatMetricName(metricName)} density probability by Company vs Platoon` },
         ];
     }
     else if (metricName === 'spatial-projection') {
@@ -394,13 +394,13 @@ function loadSpatiotemporalContent(metricName) {
     // Standard pattern for most metrics
     else {
         analysisItems = [
-            { name: `Command_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Command level` },
-            { name: `Company_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Company level` },
-            { name: `Company Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Company Type` },
-            { name: `Platoon_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
-            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
-            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
-            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` }
+            { name: `Command_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` }
         ];
     }
 
@@ -469,8 +469,12 @@ function formatSpatiotemporalName(name, metricType) {
     if (metricType === 'spatial-projection' && name.includes('_Unknown')) {
         return name.replace('_Unknown', '');
     }
-    console.log(name, metricType)
     return name.replaceAll('_', ' ').replace(metricType.replaceAll('-', ' '), '')
+    .replace('ecdf', 'ECDF')
+    .replace('kde', 'KDE')
+    .replace('boxplot', 'Boxplot')
+    .replace('facetgrid', 'FacetGrid')
+    .replace('violinplot', 'ViolinPlot');
 }
 
 // Helper function to convert kebab-case to Title Case
