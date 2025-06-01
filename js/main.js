@@ -1,12 +1,12 @@
 // Update the JavaScript to work with our sample images
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize the page
     initializePage();
-    
+
     // Set up event listeners
     setupEventListeners();
-    
+
     // Load initial content
     loadInitialContent();
 });
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializePage() {
     // Create metric content divs dynamically
     createMetricContentDivs();
-    
+
     // Set up modal for image viewing
     setupImageModal();
 }
@@ -25,22 +25,22 @@ function setupEventListeners() {
     // Communication tabs
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
+        btn.addEventListener('click', function (e) {
             openTech(e, this.textContent.toLowerCase().replace('-', ''));
         });
     });
-    
+
     // Spatiotemporal metrics
     const metricItems = document.querySelectorAll('.metric-item');
     metricItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             openMetric(this.getAttribute('data-metric'));
         });
     });
-    
+
     // Smooth scrolling for navigation
     document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
@@ -56,7 +56,7 @@ function setupEventListeners() {
 function loadInitialContent() {
     // Load Bluetooth analysis content
     loadCommunicationContent('bluetooth');
-    
+
     // Load Acceleration metric content
     loadSpatiotemporalContent('acceleration');
 }
@@ -65,24 +65,45 @@ function loadInitialContent() {
 function createMetricContentDivs() {
     const metricsContent = document.querySelector('.metrics-content');
     const metricsList = document.querySelectorAll('.metric-item');
-    
+
     metricsList.forEach(item => {
         if (item.getAttribute('data-metric') !== 'acceleration') { // Acceleration already exists in HTML
             const metricName = item.getAttribute('data-metric');
             const displayName = item.textContent;
-            
+
             const metricDiv = document.createElement('div');
             metricDiv.id = metricName;
             metricDiv.className = 'metric-content';
-            
-            metricDiv.innerHTML = `
+
+            if (metricName === 'on-the-road') {
+                metricDiv.innerHTML = `
                 <h3>${displayName}</h3>
-                <p>Analysis of ${displayName.toLowerCase()} patterns across different units in the scenario.</p>
+                <p>Analysis of ${displayName.toLowerCase()} patterns across different units in the scenario. <br>
+                The units are registered as using the road network, when closer than 100m.</p>
                 <div class="analysis-grid" id="${metricName}-grid">
                     <!-- Content will be loaded dynamically -->
                 </div>
             `;
-            
+            } else if (metricName === 'direction') {
+                metricDiv.innerHTML = `
+                <h3>${displayName}</h3>
+                <p>Analysis of ${displayName.toLowerCase()} patterns across different units in the scenario. <br>
+                Where 0º refers to the North direction, 90º refers to the East direction, 180º refers to the South direction, and 270º refers to the West direction.</p>
+                <div class="analysis-grid" id="${metricName}-grid">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            `;
+            } else {
+                metricDiv.innerHTML = `
+                    <h3>${displayName}</h3>
+                    <p>Analysis of ${displayName.toLowerCase()} patterns across different units in the scenario.</p>
+                    <div class="analysis-grid" id="${metricName}-grid">
+                        <!-- Content will be loaded dynamically -->
+                    </div>
+                `;
+            }
+
+
             metricsContent.appendChild(metricDiv);
         }
     });
@@ -98,15 +119,15 @@ function setupImageModal() {
         <img class="modal-content" id="modal-img">
     `;
     document.body.appendChild(modal);
-    
+
     // Close modal when clicking the x
     const closeBtn = modal.querySelector('.close');
-    closeBtn.addEventListener('click', function() {
+    closeBtn.addEventListener('click', function () {
         modal.style.display = 'none';
     });
-    
+
     // Close modal when clicking outside the image
-    modal.addEventListener('click', function(e) {
+    modal.addEventListener('click', function (e) {
         if (e.target === modal) {
             modal.style.display = 'none';
         }
@@ -120,16 +141,16 @@ function openTech(evt, techName) {
     techContents.forEach(content => {
         content.classList.remove('active');
     });
-    
+
     // Remove active class from all tab buttons
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {
         btn.classList.remove('active');
     });
-    
+
     // Show the selected tech content and mark the button as active
     document.getElementById(techName).classList.add('active');
-    
+
     // If event is from a button click, mark that button as active
     if (evt && evt.currentTarget) {
         evt.currentTarget.classList.add('active');
@@ -141,7 +162,7 @@ function openTech(evt, techName) {
             button.classList.add('active');
         }
     }
-    
+
     // Load content if not already loaded
     loadCommunicationContent(techName);
 }
@@ -153,17 +174,17 @@ function openMetric(metricName) {
     metricContents.forEach(content => {
         content.classList.remove('active');
     });
-    
+
     // Remove active class from all metric items
     const metricItems = document.querySelectorAll('.metric-item');
     metricItems.forEach(item => {
         item.classList.remove('active');
     });
-    
+
     // Show the selected metric content and mark the item as active
     document.getElementById(metricName).classList.add('active');
     document.querySelector(`.metric-item[data-metric="${metricName}"]`).classList.add('active');
-    
+
     // Load content if not already loaded
     loadSpatiotemporalContent(metricName);
 }
@@ -171,17 +192,17 @@ function openMetric(metricName) {
 // Load communication content
 function loadCommunicationContent(techName) {
     const grid = document.getElementById(`${techName}-grid`);
-    
+
     // Check if content is already loaded
     if (grid && grid.children.length > 0) {
         return;
     }
-    
+
     // Show loading indicator
     const loader = document.createElement('div');
     loader.className = 'loader';
     grid.appendChild(loader);
-    
+
     // Define analysis items based on technology
     let analysisItems = [
         { name: 'Command', description: `${techName.toUpperCase()} communication patterns at the Command level` },
@@ -199,19 +220,19 @@ function loadCommunicationContent(techName) {
         { name: 'Vehicle Type', description: `${techName.toUpperCase()} communication patterns by Vehicle Type` },
         { name: 'Vehicle Type_ecdf', description: `Empirical Cumulative Distribution Function by Vehicle Type for ${techName.toUpperCase()}` }
     ];
-    
+
     // Remove loader after a short delay to simulate loading
     setTimeout(() => {
         grid.removeChild(loader);
-        
+
         // Create analysis items
         analysisItems.forEach(item => {
             const analysisItem = document.createElement('div');
             analysisItem.className = 'analysis-item';
-            
+
             // Handle spaces in file names for URL encoding
             const fileName = encodeURIComponent(item.name) + '.png';
-            
+
             analysisItem.innerHTML = `
                 <img src="images/communication/${techName}/${fileName}" alt="${item.name}" class="analysis-image">
                 <div class="analysis-info">
@@ -219,13 +240,13 @@ function loadCommunicationContent(techName) {
                     <p>${item.description}</p>
                 </div>
             `;
-            
+
             // Add click event to open image in modal
             const img = analysisItem.querySelector('img');
-            img.addEventListener('click', function() {
+            img.addEventListener('click', function () {
                 openImageModal(this.src);
             });
-            
+
             grid.appendChild(analysisItem);
         });
     }, 500);
@@ -234,12 +255,12 @@ function loadCommunicationContent(techName) {
 // Load spatiotemporal content
 function loadSpatiotemporalContent(metricName) {
     const grid = document.getElementById(`${metricName}-grid`);
-    
+
     // Check if content is already loaded
     if (grid && grid.children.length > 0) {
         return;
     }
-    
+
     // If grid doesn't exist yet, create it
     if (!grid) {
         const metricContent = document.getElementById(metricName);
@@ -247,57 +268,154 @@ function loadSpatiotemporalContent(metricName) {
         newGrid.className = 'analysis-grid';
         newGrid.id = `${metricName}-grid`;
         metricContent.appendChild(newGrid);
-        
+
         // Update grid reference
         grid = newGrid;
     }
-    
+
     // Show loading indicator
     const loader = document.createElement('div');
     loader.className = 'loader';
     grid.appendChild(loader);
-    
+
     // Define analysis items for spatiotemporal metrics based on actual file naming conventions
     let analysisItems = [];
-    
+
     // Special case for spatiotemporal-coverage which has a different file structure
     if (metricName === 'spatiotemporal-coverage') {
-        analysisItems.push({ name: 'anglova', description: `${formatMetricName(metricName)} analysis` });
+        analysisItems.push({ name: 'anglova', description: `Units positions over time` });
+        analysisItems.push({ name: 'Company', description: `Units positions over time colored by Company` });
     }
-    // Special case for spatial-projection which has a different file structure
+    else if (metricName === 'speed') {
+        analysisItems = [
+            { name: 'Command_speed_ECDF', description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: 'Company_speed_ECDF', description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: 'Company Type_speed_ECDF', description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: 'Platoon_speed_ECDF', description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: 'Platoon Type_speed_ECDF', description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: 'Vehicle Function_speed_ECDF', description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: 'Vehicle Type_speed_ECDF', description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
+            { name: 'Company_Boxplot', description: `${formatMetricName(metricName)} analysis by Company` },
+            { name: 'Company_Type_Boxplot', description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: 'Platoon_Type_Boxplot', description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: 'Company_Violinplot', description: `${formatMetricName(metricName)} analysis by Company` },
+            { name: 'Command_Violinplot', description: `${formatMetricName(metricName)} analysis by Command` },
+            { name: 'Anglova_Mean_Over_Time', description: `Full scenario mean speed analysis over time` },
+            { name: 'Company_Mean_Over_Time', description: `Companies mean speed analysis over time` },
+            { name: 'Platoon_Mean_Over_Time', description: `Platoons mean speed analysis over time` },
+        ];
+    }
+    else if (metricName === 'straight-line-distance') {
+        analysisItems = [
+            { name: `Command_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
+            { name: `Anglova_KDE`, description: `${formatMetricName(metricName)} analysis full scenario density probability` },
+            { name: `Company_vs_Platoon_KDE`, description: `${formatMetricName(metricName)} density probability by Company vs Platoon` },
+            { name: `Company_Facetgrid`, description: `${formatMetricName(metricName)} density facedgrid by Company` },
+            { name: `Command_Facetgrid`, description: `${formatMetricName(metricName)} density facedgrid by Command` },
+            { name: `Company_Boxplot`, description: `${formatMetricName(metricName)} analysis by Company` },
+        ];
+    }
+    else if (metricName === 'connectivity') {
+        analysisItems = [
+            { name: `Company_Min_Max_Mean_Distances_Over_Time`, description: `The minimum, maximum, and mean distances between units over time, inner Company` },
+            { name: `Number_of_Edges_Over_Time`, description: `Graph analyses of the number of edges (Connections) over time, closer then 100m` },
+            { name: `Number_of_Groups_Over_Time`, description: `Graph analyses of the number of groups over time, closer then 100m` },
+            { name: `Number_of_Nodes_Over_Time`, description: `Graph analyses of the number of nodes (Units) over time, closer then 100m` },
+        ];
+    }
+    else if (metricName === 'convex-hull') {
+        analysisItems = [
+            { name: `Anglova`, description: `${formatMetricName(metricName)} analysis full scenario` },
+            { name: `Command`, description: `${formatMetricName(metricName)} analysis 3 outliers between Commands` },
+            { name: `Company`, description: `${formatMetricName(metricName)} analysis by Company` },
+            { name: `Company Type`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon`, description: `${formatMetricName(metricName)} analysis by Platoon` },
+            { name: `Platoon Type`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+        ];
+    }
+    else if (metricName === 'on-the-road') {
+        analysisItems = [
+            { name: `Anglova`, description: `${formatMetricName(metricName)} analysis full scenario` },
+            { name: `Command`, description: `${formatMetricName(metricName)} analysis by Command` },
+            { name: `Company`, description: `${formatMetricName(metricName)} analysis by Company` },
+            { name: `Company Type`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon`, description: `${formatMetricName(metricName)} analysis by Platoon` },
+            { name: `Platoon Type`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+        ];
+    }
+    else if (metricName === 'direction') {
+        analysisItems = [
+            { name: `Company`, description: `${formatMetricName(metricName)} analysis by Company` },
+            { name: `Platoon_Type`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+        ];
+    }
+    else if (metricName === 'path-tortuosity') {
+        analysisItems = [
+            { name: `Command_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
+            { name: `Anglova_KDE`, description: `${formatMetricName(metricName)} analysis full scenario density probability` },
+            { name: `Company_KDE`, description: `${formatMetricName(metricName)} analysis density probability by Command` },
+            { name: `Company_vs_Platoon_KDE`, description: `${formatMetricName(metricName)} density probability by Company vs Platoon` },
+        ];
+    }
+    else if (metricName === 'total-distance') {
+        analysisItems = [
+            { name: `Command_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` },
+            { name: `Anglova_KDE`, description: `${formatMetricName(metricName)} analysis full scenario density probability` },
+            { name: `Company_KDE`, description: `${formatMetricName(metricName)} analysis density probability by Command` },
+            { name: `Company_vs_Platoon_KDE`, description: `${formatMetricName(metricName)} density probability by Company vs Platoon` },
+        ];
+    }
     else if (metricName === 'spatial-projection') {
         analysisItems = [
-            { name: 'Command_Unknown', description: `${formatMetricName(metricName)} analysis for Command` },
-            { name: 'Company_Unknown', description: `${formatMetricName(metricName)} analysis for Company` },
-            { name: 'Platoon_Unknown', description: `${formatMetricName(metricName)} analysis for Platoon` },
-            { name: 'Vehicle Type_Unknown', description: `${formatMetricName(metricName)} analysis by Vehicle Type` }
+            { name: `Company_1_2`, description: `${formatMetricName(metricName)} analysis Company 1 and 2` },
+            { name: `Company_3_4`, description: `${formatMetricName(metricName)} analysis Company 3 and 4` },
+            { name: `Company_5`, description: `${formatMetricName(metricName)} analysis by Company 5` },
+            { name: `Company_6`, description: `${formatMetricName(metricName)} analysis by Company 6` },
         ];
     }
     // Standard pattern for most metrics
     else {
         analysisItems = [
-            { name: `Command_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Command level` },
-            { name: `Company_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Company level` },
-            { name: `Company Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Company Type` },
-            { name: `Platoon_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
-            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
-            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
-            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ecdf`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` }
+            { name: `Command_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Command level` },
+            { name: `Company_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Company level` },
+            { name: `Company Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Company Type` },
+            { name: `Platoon_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis at the Platoon level` },
+            { name: `Platoon Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Platoon Type` },
+            { name: `Vehicle Function_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Function` },
+            { name: `Vehicle Type_${metricName.replace(/-/g, '_')}_ECDF`, description: `${formatMetricName(metricName)} analysis by Vehicle Type` }
         ];
     }
-    
+
     // Remove loader after a short delay to simulate loading
     setTimeout(() => {
         grid.removeChild(loader);
-        
+
         // Create analysis items
         analysisItems.forEach(item => {
             const analysisItem = document.createElement('div');
             analysisItem.className = 'analysis-item';
-            
+
             // Handle spaces in file names for URL encoding
             const fileName = encodeURIComponent(item.name) + '.png';
-            
+
             analysisItem.innerHTML = `
                 <img src="images/spatiotemporal/${metricName}/${fileName}" alt="${item.name}" class="analysis-image">
                 <div class="analysis-info">
@@ -305,13 +423,13 @@ function loadSpatiotemporalContent(metricName) {
                     <p>${item.description}</p>
                 </div>
             `;
-            
+
             // Add click event to open image in modal
             const img = analysisItem.querySelector('img');
-            img.addEventListener('click', function() {
+            img.addEventListener('click', function () {
                 openImageModal(this.src);
             });
-            
+
             grid.appendChild(analysisItem);
         });
     }, 500);
@@ -321,7 +439,7 @@ function loadSpatiotemporalContent(metricName) {
 function openImageModal(src) {
     const modal = document.querySelector('.modal');
     const modalImg = document.getElementById('modal-img');
-    
+
     modal.style.display = 'block';
     modalImg.src = src;
 }
@@ -330,13 +448,13 @@ function openImageModal(src) {
 function formatName(name) {
     // Replace underscores with spaces
     let formattedName = name.replace(/_/g, ' ');
-    
+
     // If name contains 'ecdf', format it as 'ECDF of...'
     if (formattedName.toLowerCase().includes('ecdf')) {
         formattedName = formattedName.replace(/ecdf/i, '');
-        formattedName = 'ECDF of' + formattedName;
+        formattedName = 'ECDF of ' + formattedName;
     }
-    
+
     return formattedName;
 }
 
@@ -346,19 +464,13 @@ function formatSpatiotemporalName(name, metricType) {
     if (metricType === 'spatiotemporal-coverage' && name === 'anglova') {
         return 'Spatiotemporal Coverage';
     }
-    
+
     // Special case for spatial-projection
     if (metricType === 'spatial-projection' && name.includes('_Unknown')) {
         return name.replace('_Unknown', '');
     }
-    
-    // For metrics with _metric_name_ecdf pattern
-    const metricNameUnderscored = metricType.replace(/-/g, '_');
-    if (name.includes('_' + metricNameUnderscored + '_ecdf')) {
-        return name.replace('_' + metricNameUnderscored + '_ecdf', '');
-    }
-    
-    return name;
+    console.log(name, metricType)
+    return name.replaceAll('_', ' ').replace(metricType.replaceAll('-', ' '), '')
 }
 
 // Helper function to convert kebab-case to Title Case
