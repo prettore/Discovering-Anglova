@@ -1,6 +1,6 @@
 # Discovering Anglova - Vignette 2 Analysis
 
-This repository contains a GitHub Pages website that showcases data analyses conducted to explore the characteristics of the Anglova Scenario Vignette 2. The analyses focus on spatiotemporal mobility metrics and communication patterns within the scenario.
+This repository contains a GitHub Pages website (https://prettore.github.io/Discovering-Anglova/) that showcases data analyses conducted to explore the characteristics of the Anglova Scenario Vignette 2. The analyses focus on spatiotemporal mobility metrics and communication patterns within the scenario.
 
 ## Overview
 
